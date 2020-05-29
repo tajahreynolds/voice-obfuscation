@@ -32,23 +32,25 @@ def obfuscate_dataset(filename, opusdir, curdir):
         # pitch down random
         pitchDown = random.randint(-800, -400)
         os.system('sox %s %s pitch %s'%(filename, basefile+'_freq_1.wav', pitchDown))
-        filenames.append(basefile+'_freq_1.wav')
-        print('basefile %s pitched down %s'%(basefile,pitchDown))
+        filenames.append(basefile+'_freq_one.wav')
+        #print('basefile %s pitched down %s\n'%(basefile,pitchDown))
 
         # pitch up random
         pitchUp = random.randint(200, 400)
         os.system('sox %s %s pitch %s'%(filename, basefile+'_freq_2.wav', pitchUp))
-        filenames.append(basefile+'_freq_2.wav')
-        print('basefile %s pitched up %s'%(basefile,pitchUp))
+        filenames.append(basefile+'_freq_two.wav')
+        #print('basefile %s pitched up %s\n'%(basefile,pitchUp))
 
         return filenames
     
-    _2=normalize_pitch(filename)
+    _1=normalize_pitch(filename)
 
-    obfuscated_filenames=_2
+    obfuscated_filenames=_1
 
     return obfuscated_filenames
 
+## augment by 'python3 obfuscate.py [folderpath]
+## '/Users/tjrey/Documents/dev/voice-obfuscation/audio'
 opusdir=os.getcwd()+'/opustools'
 directory=sys.argv[1]
 curdir=os.getcwd()
@@ -70,10 +72,13 @@ print(wavfiles)
 obfuscated_files=list()
 
 for i in range(len(wavfiles)):
-    #try:
-    temp=obfuscate_dataset(wavfiles[i], opusdir, curdir)
-    obfuscated_files=obfuscated_files+temp 
-    #except:
-        #print('error')
+    try:
+        print(os.getcwd())
+        obfuscated_files=obfuscate_dataset(wavfiles[i], opusdir, curdir)
+        print(obfuscated_files)
+        #sort(wavfiles[i],obfuscated_files,directory)
+        #print(obfuscated_files) 
+    except:
+        print('error')
 
 print('obfuscated dataset with %s files'%(str(len(obfuscated_files))))
