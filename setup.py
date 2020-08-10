@@ -3,11 +3,11 @@ Quick installation script to get everything up-and-running.
 '''
 import os
 
-os.system('brew install opus-tools')
-os.system('brew install opus')
-os.system('brew install sox')
-os.system('brew install ffmpeg')
-os.system('pip3 install -U nltk')
+os.system('pip install opus-tools')
+os.system('pip install opus')
+os.system('pip install sox')
+os.system('pip install ffmpeg')
+os.system('pip install -U nltk')
 import nltk
 nltk.download('wordnet')
-os.system('pip3 install -r requirements.txt')
+os.system('pip install -r requirements.txt')
